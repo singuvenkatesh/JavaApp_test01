@@ -25,5 +25,21 @@ pipeline {
             }
 
         }
+		
+		stage('Docker - Build'){
+			steps{
+			   withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]) {
+					sh "docker login -u admin -p ${dockerpwd}"
+			   }
+			   
+			   sh "docker build . -t singuvenkatesh/myweb:${DOCKER_TAG} "
+			}
+		}
+		
+		stage('Docker - Push'){
+			steps{
+			   sh "docker push singuvenkatesh/myweb:${DOCKER_TAG}"
+			}
+		}
     }
 }
