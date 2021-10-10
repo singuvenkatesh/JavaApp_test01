@@ -10,7 +10,7 @@ pipeline {
         stage('clone') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/singuvenkatesh/JavaApp_test01.git'
+                git branch: 'main', url: 'https://github.com/singuvenkatesh/JavaApp_test01.git'
 
             }
 
