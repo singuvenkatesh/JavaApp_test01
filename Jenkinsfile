@@ -45,6 +45,13 @@ pipeline {
 			}
 		}
     }
+	
+		stage('Deploy Image to Kubernetes'){
+			steps{
+			   sh "kubectl get pods"
+			}
+		}
+    }
 }
 
 def getLatestCommitId(){
