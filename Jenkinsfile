@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+	environment{
+	
+	DOCKER_TAG = "${getLatestCommitId()}"
+	}
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "M3"
@@ -42,4 +45,9 @@ pipeline {
 			}
 		}
     }
+}
+
+def getLatestCommitId(){
+	def commitId = sh returnStdout: true, script: 'git rev-parse HEAD'
+	return commitId
 }
