@@ -52,7 +52,11 @@ pipeline {
 		}
 		stage('Deploy Image to kubernetes'){
 			steps{
-			   sh "sudo kubectl get pods"
+			   sh """
+			   
+			   sudo kubectl get pods
+			   
+			   """
 			}
 		}
     }
