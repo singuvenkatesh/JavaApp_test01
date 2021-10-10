@@ -1,0 +1,34 @@
+queue:
+  name: Hosted VS2017
+  demands: maven
+
+
+#Your build pipeline references an undefined variable named ‘Parameters.mavenPOMFile’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+steps:
+- task: Maven@2
+  displayName: Maven JavaApp/pom.xml
+  inputs:
+    mavenPomFile: 'JavaApp/pom.xml'
+    goals: 'clean package'
+    testResultsFiles: '**/TEST-*.xml '
+    testRunTitle: TestCase
+
+- task: PublishTestResults@2
+  displayName: Publish Test Results **\TEST*.xml **\TEST*.java
+  inputs:
+    testResultsFiles: |
+     **\TEST*.xml
+     **\TEST*.java
+
+- task: CopyFiles@2
+  displayName: Copy Files
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: |
+     **/*.jar
+     **/*.war
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifact
+
