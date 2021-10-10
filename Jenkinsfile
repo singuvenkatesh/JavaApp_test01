@@ -44,14 +44,15 @@ pipeline {
 			   sh "docker push singuvenkatesh/myweb:${DOCKER_TAG}"
 			}
 		}
-    }
-	
-		stage('Deploy Image to Kubernetes'){
+		
+		stage('Deploy Image to kubernetes'){
 			steps{
 			   sh "kubectl get pods"
 			}
 		}
     }
+	
+		
 }
 
 def getLatestCommitId(){
