@@ -32,7 +32,7 @@ pipeline {
 		stage('Docker - Build'){
 			steps{
 			   withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]) {
-					sh "docker login -u admin -p ${dockerpwd}"
+					sh "docker login -u singuvenkatesh -p ${dockerpwd}"
 			   }
 			   
 			   sh "docker build . -t singuvenkatesh/myweb:${DOCKER_TAG} "
