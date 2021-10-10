@@ -47,7 +47,7 @@ pipeline {
 		
 		stage('Removed unused images'){
 			steps{
-			   sh "docker rmi $(docker images | singuvenkatesh/myweb | awk '{print \$3}')"
+			   sh "docker rmi \$(docker images | singuvenkatesh/myweb | awk '{print \$3}')"
 			}
 		}
 		stage('Deploy Image to kubernetes'){
