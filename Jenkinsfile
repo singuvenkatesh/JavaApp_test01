@@ -53,10 +53,10 @@ pipeline {
 		
 		stage('Kubectl get command') {
 			steps {
-        withCredentials([
-            string(credentialsId: 'jenkins-k8s', variable: 'jenkins-k8s')
-            ]) {
-             sh 'kubectl --token $jenkins-k8s --server https://172.31.80.57:8443 get pods '
+			withKubeConfig(caCertificate: '/root/.minikube/ca.crt', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://172.31.80.57:8443') {
+			
+             sh "kubectl get pods"
+			 
                }
             }
            }
