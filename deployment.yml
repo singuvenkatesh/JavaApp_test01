@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pythonapp
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: pythonapp
+  template:
+    metadata:
+      labels:
+        app: pythonapp
+    spec:
+      containers:
+      - image: singuvenkatesh/myweb:DOCKER_TAG
+        name: pythonapp
+        ports:
+        - containerPort: 8080
+	
