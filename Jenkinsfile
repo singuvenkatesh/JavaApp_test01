@@ -50,6 +50,16 @@ pipeline {
 			   sh "docker rmi \$(docker images | grep singuvenkatesh/myweb | awk '{print \$3}')"
 			}
 		}
+	    
+	    	stage('Deploy Patient App') {
+   			 steps {
+       			 withCredentials([
+            		string(credentialsId: 'kubernetes', variable: 'kubeconfig')
+            				]) {
+             		sh 'kubectl --token $kubeconfig --server https://172.31.80.57:8443 --insecure-skip-tls-verify=true get nodes '
+               }
+            }
+           }
 		
 		stage('Kubectl get command') {
 			steps {
