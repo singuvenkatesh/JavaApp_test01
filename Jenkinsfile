@@ -58,7 +58,6 @@ pipeline {
             				]) {
              		sh 'kubectl --token $kubeconfig --server https://172.31.80.57:8443 --insecure-skip-tls-verify=true get nodes '
                }
-            }
            }
 		
            }
