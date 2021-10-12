@@ -54,9 +54,9 @@ pipeline {
 		stage('Kubectl get command') {
 			steps {
         withCredentials([
-            string(credentialsId: 'kubectl', variable: 'kubectl')
+            string(credentialsId: 'jenkins-k8s', variable: 'jenkins-k8s')
             ]) {
-             sh 'kubectl --token $kubectl --server https://172.31.80.57:8443 --insecure-skip-tls-verify=true get pods'
+             sh 'kubectl --token $jenkins-k8s --server https://172.31.80.57:8443 --insecure-skip-tls-verify=true get pods'
                }
             }
            }
