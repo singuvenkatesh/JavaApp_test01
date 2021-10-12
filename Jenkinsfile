@@ -50,15 +50,16 @@ pipeline {
 			   sh "docker rmi \$(docker images | grep singuvenkatesh/myweb | awk '{print \$3}')"
 			}
 		}
-		stage('Deploy Image to kubernetes'){
-			steps{
-			   sh """
-			   
-			   sudo kubectl get pods
-			   
-			   """
-			}
-		}
+		
+		stage('Kubectl get command') {
+			steps {
+        withCredentials([
+            string(credentialsId: 'kubectl', variable: 'kubectl')
+            ]) {
+             sh 'kubectl --token $kubectl --server https://172.31.80.57:8443 --insecure-skip-tls-verify=true get pods'
+               }
+            }
+           }
     }
 	
 		
