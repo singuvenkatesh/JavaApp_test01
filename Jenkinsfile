@@ -61,14 +61,6 @@ pipeline {
             }
            }
 		
-		stage('Kubectl get command') {
-			steps {
-			withKubeConfig(caCertificate: '"/root/.minikube/ca.crt"', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://172.31.80.57:8443') {
-			
-             sh "kubectl get pods"
-			 
-               }
-            }
            }
     }
 	
