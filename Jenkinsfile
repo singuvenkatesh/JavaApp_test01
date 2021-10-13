@@ -54,7 +54,7 @@ pipeline {
 	    	stage('Deploy Patient App') {
    			 steps {
        			withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://172.31.80.57:8443']) {
-				sh "sed -i 's|DOCKER_TAG|${DOCKER_TAG}|g' deployment.yml"
+				sh "sed -i 's|DOCKER_TAG|abcd|g' deployment.yml"
 				
 				sh "cat deployment.yml"
       				
