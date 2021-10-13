@@ -18,7 +18,7 @@ spec:
         app: pythonapp
     spec:
       containers:
-      - image: singuvenkatesh/myweb:DOCKER_TAG
+      - image: singuvenkatesh/myweb:tagVersion
         name: pythonapp
         ports:
         - containerPort: 8080
