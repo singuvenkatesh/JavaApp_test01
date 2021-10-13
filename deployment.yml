@@ -22,4 +22,3 @@ spec:
         name: pythonapp
         ports:
         - containerPort: 8080
-	
