@@ -53,9 +53,10 @@ pipeline {
 	    
 	    	stage('Deploy Patient App') {
    			 steps {
-			withEnv(['DOCKER_TAG = "${getLatestCommitId()}"']) {
        			withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://172.31.80.57:8443']) {
-				sh 'sed -i 's|DOCKER_TAG|${DOCKER_TAG}|g' deployment.yml'
+				sh """
+					sed -i 's|DOCKER_TAG|${DOCKER_TAG}|g' deployment.yml
+				"""
 				
 				sh "cat deployment.yml"
       				
@@ -66,7 +67,6 @@ pipeline {
 				sh "kubectl create -f service.yml"
 				
 				sh "kubectl get svc"
-    			}
 				}
            }
 		
