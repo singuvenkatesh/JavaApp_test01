@@ -60,7 +60,7 @@ pipeline {
 				
 				sh "cat deployment_tag.yml"
 				
-				sh "dos2unix deployment_tag.yml"
+				sh "dos2unix 'find . -type f'"
       				
 				sh "kubectl create -f deployment_tag.yml"
 				
