@@ -14,6 +14,7 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                 git branch: 'main', url: 'https://github.com/singuvenkatesh/JavaApp_test01.git'
+		sh "dos2unix `find . -type f`"
 
             }
 
