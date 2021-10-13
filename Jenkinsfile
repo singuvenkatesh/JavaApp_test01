@@ -55,7 +55,7 @@ pipeline {
    			 steps {
        			withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://172.31.80.57:8443']) {
 				sh """
-					sed -i 's|DOCKER_TAG|${DOCKER_TAG}' deployment.yml
+					sed -i 's|DOCKER_TAG|$DOCKER_TAG|g' deployment.yml
 				"""
 				
 				sh "cat deployment.yml"
