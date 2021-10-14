@@ -1,24 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pythonapp
+  labels:
+    app: myapp
+  name: myappdeployment
 spec:
-  replicas: 3
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
+  replicas: 2
   selector:
     matchLabels:
-      app: pythonapp
+      app: myapp
+  strategy: {}
   template:
     metadata:
       labels:
-        app: pythonapp
+        app: myapp
     spec:
       containers:
-      - image: singuvenkatesh/myweb:tagVersion
-        name: pythonapp
+      - image: nginx
+        name: myapp
         ports:
-        - containerPort: 8080
+        - containerPort: 80
