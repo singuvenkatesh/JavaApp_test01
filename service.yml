@@ -1,13 +1,16 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: pythonapp
-spec:
-  selector:
-    app: pythonapp
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-    nodePort: 30000
-  type: LoadBalancer
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: exampleservice
+    spec:
+      selector:
+        app: myapp
+      ports:
+      - protocol: "TCP"
+        # Port accessible inside cluster
+        port: 8081
+        # Port to forward to inside the pod
+        targetPort: 80
+        # Port accessible outside cluster
+        nodePort: 30002
+      type: NodePort
