@@ -3,6 +3,10 @@
 for reference jenkins with nexus
 https://appfleet.com/blog/publishing-artifacts-to-nexus-using-jenkins-pipelines/
 
+for reference jenkins docker agent setup
+https://narenchejara.medium.com/how-to-configure-docker-container-as-build-slaves-for-jenkins-d7795f78402d
+https://medium.com/xebia-engineering/using-docker-containers-as-jenkins-build-slaves-a0bb1c9190d
+
 install maven, create creds, install nexusArtifactUploader,pipeline-utility-steps plugins on jenkins
 
 docker run -d --name jenkins-ci -p 8080:8080 jenkins/jenkins:lts
@@ -19,11 +23,11 @@ docker exec -i nexus_repo cat /nexus-data/admin.password
 
 Port 4243: Docker Remote API port
 HostPort Range: 32768 to 60999, used by Docker to assign a host port for Jenkins to connect to the container
-Login to server 2 where Docker is installed and open the docker service file /lib/systemd/system/docker.service. Search for ExecStart and replace that line with the following:
-ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock
+Login to server 2 where Docker is installed and open the docker service file `/lib/systemd/system/docker.service`. Search for ExecStart and replace that line with the following:
+`ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock`
 Reload and restart Docker service
-sudo systemctl daemon-reload
-sudo service docker restart
+`sudo systemctl daemon-reload`
+`sudo service docker restart`
 Go to Jenkins Host server and execute
 curl http://10.10.25.51:4243/version
 Replace your Host IP with 10.10.25.51. You should receive output in JSON format as shown below.
