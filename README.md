@@ -36,8 +36,8 @@ That’s it! Now we will move towards creating a Jenkins agent docker image
 
 Let’s build a new image from scratch.
 SSHD Config File
-Create a ‘sshd_config’ file and copy/paste the below sshd configuration settings into the file.
-Port 22
+Create a `sshd_config` file and copy/paste the below sshd configuration settings into the file.
+`Port 22
 Protocol 2
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
@@ -46,10 +46,10 @@ HostKey /etc/ssh/ssh_host_ed25519_key
 LoginGraceTime 120
 PermitRootLogin yes
 PubkeyAuthentication yes
-UsePAM yes
+UsePAM yes`
 Create a Docker File
 Create a docker file (Dockerfile) and copy/paste the following commands in it and build an image
-FROM ubuntu
+`FROM ubuntu
 RUN mkdir -p /var/run/sshd
 RUN apt -y update
 RUN apt install -y openjdk-8-jdk
@@ -57,7 +57,7 @@ RUN apt install -y openssh-server
 RUN ssh-keygen -A
 ADD ./sshd_config /etc/ssh/sshd_config
 RUN echo root:password123 | chpasswd
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/usr/sbin/sshd", "-D"]`
 Above code, snippet does the following
 Create a privilege separation directory for sshd services
 Install open JDK and OpenSSH-server packages
@@ -67,9 +67,9 @@ Read username: password from the stdin and update it on /etc/passwd
 Start sshd services
 Build an image
 Run the command below in order to build the image from the docker file
-$ docker image build -t docker-slave .
+`$ docker image build -t docker-slave .`
 Launch a Container
-$ docker run -d -ti -p 38787:22 docker-slave:latest
+`$ docker run -d -ti -p 38787:22 docker-slave:latest`
 Test SSH Connection
-$ ssh root@<machine_ip> -p 38787
+`$ ssh root@<machine_ip> -p 38787`
 
